@@ -54,7 +54,7 @@ public class HsqlInventorySlotDao extends DaoBase<InventorySlot>
 			
 			insert = connection.prepareStatement(""
 					+ "insert into InventorySlots(item_id,champion_id) "
-					+ "values (?,?,?)");
+					+ "values (?,?)");
 			
 			update = connection.prepareStatement(""
 					+ "update InventorySlots set"
@@ -81,7 +81,7 @@ public class HsqlInventorySlotDao extends DaoBase<InventorySlot>
 		try 
 		{
 			insert.setLong(1, ent.getItem().getId());
-			insert.setLong(3, ent.getChampion().getId());	
+			insert.setLong(2, ent.getChampion().getId());	
 			insert.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -154,8 +154,8 @@ public class HsqlInventorySlotDao extends DaoBase<InventorySlot>
 		try
 		{
 			update.setLong(1, ent.getItem().getId());
-			update.setLong(3, ent.getChampion().getId());
-			update.setLong(4, ent.getId());
+			update.setLong(2, ent.getChampion().getId());
+			update.setLong(3, ent.getId());
 			update.executeUpdate();
 		}
 		catch(Exception ex)

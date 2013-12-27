@@ -19,12 +19,12 @@ public class Champion extends EntityBase {
 	// Champion - Account (:1)
 	private Account account;
 	// Champion - InventorySlot (1:n=6)
-	private InventorySlot[] inventorySlots;
+	private InventorySlot[] inventorySlots = new InventorySlot[6];
 	
-	public Champion() {
-		inventorySlots = new InventorySlot[6];
-		for(int i=0; i<6; i++) {
-			inventorySlots[i].setChampion(this);
+	
+	public Champion(){
+		for(int i=0; i<6; i++){
+			inventorySlots[i] = new InventorySlot();
 		}
 	}
 	
@@ -59,10 +59,10 @@ public class Champion extends EntityBase {
 		inventorySlots = i;
 	}
 	
-	public void giveItem(Item i) throws InventoryFullException{
+	public void giveItem(Item item) throws InventoryFullException{
 		for(int index=0; index<6; index++) {
 			if(inventorySlots[index].isEmpty()) {
-				inventorySlots[index].setItem(i);
+				inventorySlots[index].setItem(item);
 				inventorySlots[index].setChampion(this);
 				return;
 			}

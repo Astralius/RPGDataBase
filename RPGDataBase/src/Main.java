@@ -58,11 +58,12 @@ public class Main {
 		accountDao.persistAdd(a1);
 		placeDao.persistAdd(noobland);
 		itemDao.persistAdd(i1);
-		for(int i=0;i<6;i++) {
-			inventoryDao.persistAdd(c1.getInventorySlots()[i]);
-		}
 		championDao.persistAdd(c1);
-		
+		for(InventorySlot i : c1.getInventorySlots()) {
+			if(!i.isEmpty())
+				inventoryDao.persistAdd(i);
+		}
+
 		uow.commit();
 		uow.close();
 	}
