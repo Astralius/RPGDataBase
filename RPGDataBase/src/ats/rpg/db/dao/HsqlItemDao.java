@@ -50,8 +50,8 @@ public class HsqlItemDao extends DaoBase<Item> implements ItemDao {
 						+ "name VARCHAR(50),"
 						+ "type VARCHAR(50),"
 						+ "price INT,"
-						+ "damage INT"
-						+ "defense INT"
+						+ "damage INT,"
+						+ "defense INT,"
 						+ "MPbonus INT"
 						+ ")");
 			}

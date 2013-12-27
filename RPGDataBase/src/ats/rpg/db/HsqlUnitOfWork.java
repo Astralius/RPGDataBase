@@ -26,7 +26,7 @@ public class HsqlUnitOfWork implements UnitOfWork {
 		try {
 			if(connection==null||connection.isClosed())
 				connection = DriverManager.getConnection
-					("jdbc:hsqldb:hsql://localhost/workdb");
+					("jdbc:hsqldb:hsql://localhost/");
 		} 
 		catch(SQLException ex) {
 			ex.printStackTrace();
