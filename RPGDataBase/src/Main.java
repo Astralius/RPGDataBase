@@ -13,10 +13,10 @@ public class Main {
 		HsqlUnitOfWork uow = new HsqlUnitOfWork();
 		
 		HsqlAccountDao accountDao = new HsqlAccountDao(uow);
-		HsqlChampionDao championDao = new HsqlChampionDao(uow);
 		HsqlPlaceDao placeDao = new HsqlPlaceDao(uow);
-		HsqlInventorySlotDao inventoryDao = new HsqlInventorySlotDao(uow);
+		HsqlChampionDao championDao = new HsqlChampionDao(uow);
 		HsqlItemDao itemDao = new HsqlItemDao(uow);
+		HsqlInventorySlotDao inventoryDao = new HsqlInventorySlotDao(uow);
 		
 		Account a1 = new Account();
 		a1.setLogin("Astralius");
@@ -46,13 +46,10 @@ public class Main {
 		i1.setDefense(0);
 		i1.setMpbonus(0);
 		i1.setPrice(100);
-		
-		InventorySlot[] inventory = new InventorySlot[6];
-		c1.setInventorySlots(inventory);
-		inventory[0].setItem(i1);
-		inventory[0].setAmount(1);
-		inventory[0].setChampion(c1);
+		i1.setDamage(0);
 	
+		
+		
 		accountDao.persistAdd(a1);
 		placeDao.persistAdd(noobland);
 		itemDao.persistAdd(i1);

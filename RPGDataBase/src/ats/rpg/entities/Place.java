@@ -8,9 +8,9 @@ import ats.rpg.db.EntityBase;
 public class Place extends EntityBase {
 	
 	private String name;
-	private float HPModifier,
-			      MPModifier;
-	private int reqLvl;
+	private float HPModifier = 1.0f,
+			      MPModifier = 1.0f;	// default values
+	private int reqLvl = 1;
 	
 	// Place - Champion (1:n)
 	private List<Champion> champions;

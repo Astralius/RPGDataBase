@@ -8,10 +8,10 @@ public class Champion extends EntityBase {
 	private String name,
 				   profession;
 	
-	private int level,
-			    HP,
-			    MP,
-			    coins;
+	private int level = 1,
+			    HP = 100,
+			    MP = 100,		// default values
+			    coins = 0;
 	
 	// Champion - Place (:1)
 	private Place place;

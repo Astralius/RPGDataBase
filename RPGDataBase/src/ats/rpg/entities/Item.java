@@ -10,10 +10,10 @@ public class Item extends EntityBase {
 
 	private String name,
 				   type;
-	private int price,
-	            damage,
-	            defense,
-	            mpbonus;
+	private int price = 1,
+	            damage = 0,		// default values
+	            defense = 0,
+	            mpbonus = 0;
 	
 	// Item-InventorySlot (1:n)
 	private List<InventorySlot> inventorySlots;

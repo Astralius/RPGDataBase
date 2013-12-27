@@ -5,7 +5,7 @@ import ats.rpg.db.EntityBase;
 
 public class InventorySlot extends EntityBase {
 
-	private int amount;
+	private int amount = 1;
 	
 	// InventorySlot - Champion (:1)
 	private Champion champion;
