@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import ats.rpg.db.EntityBase;
@@ -17,7 +18,7 @@ public class Account extends EntityBase {
 	private Date creationDate = new Date(System.currentTimeMillis());
 	
 	// Account - Champion (1:n)
-	private List<Champion> champions;
+	private List<Champion> champions = new ArrayList<Champion>();
 
 	
 	public List<Champion> getChampions() {
@@ -40,22 +41,28 @@ public class Account extends EntityBase {
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
+	public void addPassword(String password) {
 		try {
 			this.password = hashIt(password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getEmail() {
 		return email;
 	}
-	public void setEmail(String email) throws IllegalArgumentException{
+	public void addEmail(String email) throws IllegalArgumentException{
 		if(validateEmail(email)) 
 			this.email = email;
 		else
 			throw new IllegalArgumentException("Invalid e-mail!");
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public Date getCreationDate() {
@@ -64,7 +71,7 @@ public class Account extends EntityBase {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-
+	
 	
 	// Useful utility functions:
 	
@@ -99,5 +106,6 @@ public class Account extends EntityBase {
 			else
 				return false;
 		}
+		
 		
 }

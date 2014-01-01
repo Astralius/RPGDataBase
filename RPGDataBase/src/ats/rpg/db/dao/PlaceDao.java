@@ -4,5 +4,5 @@ import ats.rpg.db.Dao;
 import ats.rpg.entities.*;
 
 public interface PlaceDao extends Dao<Place> {
-	public void setChampions(Place place);
+	public void setChampions(Place p, ChampionDao dao);
 }

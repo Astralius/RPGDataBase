@@ -1,10 +1,12 @@
-package ats.rpg.db;
+package ats.rpg.db.hsql;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+
+import ats.rpg.db.EntityBase;
+import ats.rpg.db.UnitOfWork;
+import ats.rpg.db.UnitOfWorkDao;
 
 
 public class HsqlUnitOfWork implements UnitOfWork {
@@ -27,6 +29,8 @@ public class HsqlUnitOfWork implements UnitOfWork {
 			if(connection==null||connection.isClosed())
 				connection = DriverManager.getConnection
 					("jdbc:hsqldb:hsql://localhost/");
+			connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			connection.setAutoCommit(false);
 		} 
 		catch(SQLException ex) {
 			ex.printStackTrace();
@@ -58,9 +62,12 @@ public class HsqlUnitOfWork implements UnitOfWork {
 			for(EntityBase ent : deleted.keySet())
 				deleted.get(ent).persistDelete(ent);
 			
+			added.clear();
+			changed.clear();
+			deleted.clear();
+			
 			conn.commit();
 			conn.setAutoCommit(true);
-			
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}	

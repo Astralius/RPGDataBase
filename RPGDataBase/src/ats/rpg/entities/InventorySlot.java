@@ -10,12 +10,8 @@ public class InventorySlot extends EntityBase {
 	// InventorySlot - Item (1:{0,1})
 	private Item item;
 	
-	
 	public boolean isEmpty() {
-		if(item == null) {
-			return true;
-		}
-		return false;
+		return item == null;
 	}
 	
 	public Champion getChampion() {

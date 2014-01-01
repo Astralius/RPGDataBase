@@ -9,10 +9,10 @@ public class Champion extends EntityBase {
 	private String name,
 				   profession;
 	
-	private int level = 1,
-			    HP = 100,
-			    MP = 100,		// default values
-			    coins = 0;
+	private Integer level = 1,
+			        HP = 100,
+			        MP = 100,		// default values
+			        coins = 0;
 	
 	// Champion - Place (:1)
 	private Place place;
@@ -53,9 +53,6 @@ public class Champion extends EntityBase {
 			// Nie powinno nigdy wystąpić:
 			throw new IndexOutOfBoundsException("Fatal Error! Illegal number of inventory slots!");
 		}
-		for(int index=0; index<i.length; index++) {
-			i[index].setChampion(this);
-		}
 		inventorySlots = i;
 	}
 	
@@ -64,6 +61,7 @@ public class Champion extends EntityBase {
 			if(inventorySlots[index].isEmpty()) {
 				inventorySlots[index].setItem(item);
 				inventorySlots[index].setChampion(this);
+				item.addSlotReference(inventorySlots[index]);
 				return;
 			}
 		}
@@ -86,8 +84,7 @@ public class Champion extends EntityBase {
 		this.profession = profession.toString();
 	}
 
-	
-	public int getLevel() {
+	public Integer getLevel() {
 		return level;
 	}
 
@@ -95,7 +92,7 @@ public class Champion extends EntityBase {
 		this.level = level;
 	}
 
-	public int getHP() {
+	public Integer getHP() {
 		return HP;
 	}
 
@@ -103,7 +100,7 @@ public class Champion extends EntityBase {
 		HP = hP;
 	}
 
-	public int getMP() {
+	public Integer getMP() {
 		return MP;
 	}
 
@@ -111,7 +108,7 @@ public class Champion extends EntityBase {
 		this.MP = MP;
 	}
 
-	public int getCoins() {
+	public Integer getCoins() {
 		return coins;
 	}
 

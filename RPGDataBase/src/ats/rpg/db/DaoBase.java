@@ -24,7 +24,7 @@ public abstract class DaoBase<E extends EntityBase>
 		uow.markDeleted(ent, this);
 	}
 	
-	public abstract E get(int id);
+	public abstract E get(long id);
 	public abstract List<E> getAll();
 	public abstract void persistAdd(EntityBase ent);
 	public abstract void persistDelete(EntityBase ent);

@@ -1,6 +1,6 @@
 package ats.rpg.db;
 
-public class EntityBase {
+public abstract class EntityBase {
 	
 	protected long id;
 
@@ -12,10 +12,14 @@ public class EntityBase {
 		this.id = id;
 	}
 	
-	public boolean equals(EntityBase ent) {
-		if(this.id == ent.id)
-			return true;
-		else
+	public boolean isNull() {
+		if((Long)id != null)
 			return false;
+		else 
+			return true;
+	}
+	
+	public boolean equals(EntityBase ent) {
+		return (ent.id == this.id) && (ent.getClass().equals(this.getClass()));
 	}
 }

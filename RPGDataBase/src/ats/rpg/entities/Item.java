@@ -1,5 +1,6 @@
 package ats.rpg.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ats.rpg.db.EntityBase;
@@ -10,22 +11,26 @@ public class Item extends EntityBase {
 
 	private String name,
 				   type;
-	private int price = 1,
-	            damage = 0,		// default values
-	            defense = 0,
-	            mpbonus = 0;
+	private Integer price = 1,
+	            	damage = 0,		// default values
+	            	defense = 0,
+	            	mpBonus = 0;
 	
 	// Item-InventorySlot (1:n)
-	private List<InventorySlot> inventorySlots;
+	private List<InventorySlot> inventorySlots = new ArrayList<InventorySlot>();
 	
 	
 	public List<InventorySlot> getInventorySlots() {
 		return inventorySlots;
 	}
-
+	public void addSlotReference(InventorySlot i) {
+		if(inventorySlots != null)
+			inventorySlots.add(i);
+	}
 	public void setInventorySlots(List<InventorySlot> inventorySlots) {
 		this.inventorySlots = inventorySlots;
 	}
+
 
 	public String getName() {
 		return name;
@@ -43,7 +48,7 @@ public class Item extends EntityBase {
 		this.type = type.toString();
 	}
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
@@ -51,7 +56,7 @@ public class Item extends EntityBase {
 		this.price = price;
 	}
 
-	public int getDamage() {
+	public Integer getDamage() {
 		return damage;
 	}
 
@@ -59,7 +64,7 @@ public class Item extends EntityBase {
 		this.damage = damage;
 	}
 
-	public int getDefense() {
+	public Integer getDefense() {
 		return defense;
 	}
 
@@ -67,12 +72,12 @@ public class Item extends EntityBase {
 		this.defense = defense;
 	}
 
-	public int getMpbonus() {
-		return mpbonus;
+	public Integer getMpBonus() {
+		return mpBonus;
 	}
 
 	public void setMpbonus(int mpbonus) {
-		this.mpbonus = mpbonus;
+		this.mpBonus = mpbonus;
 	}
-
+	
 }

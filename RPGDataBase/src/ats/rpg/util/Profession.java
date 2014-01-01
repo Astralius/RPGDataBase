@@ -1,5 +1,5 @@
 package ats.rpg.util;
 
 public enum Profession {
-	WARRIOR, MAGE, ARCHER
+	WARRIOR, MAGE, ARCHER, GM
 }

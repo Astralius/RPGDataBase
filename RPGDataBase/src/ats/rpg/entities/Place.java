@@ -1,5 +1,6 @@
 package ats.rpg.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ats.rpg.db.EntityBase;
@@ -8,20 +9,22 @@ import ats.rpg.db.EntityBase;
 public class Place extends EntityBase {
 	
 	private String name;
-	private float HPModifier = 1.0f,
+	private Float HPModifier = 1.0f,
 			      MPModifier = 1.0f;	// default values
-	private int reqLvl = 1;
+	private Integer reqLvl = 1;
 	
 	// Place - Champion (1:n)
-	private List<Champion> champions;
+	private List<Champion> champions = new ArrayList<Champion>();
 	
 	
 	public List<Champion> getChampions() {
 		return champions;
 	}
-	
 	public void setChampions(List<Champion> champions) {
 		this.champions = champions;
+	}
+	public void addChampion(Champion c) {
+		champions.add(c);
 	}
 	
 	public String getName() {
@@ -32,7 +35,7 @@ public class Place extends EntityBase {
 		this.name = name;
 	}
 
-	public float getHPModifier() {
+	public Float getHPModifier() {
 		return HPModifier;
 	}
 
@@ -40,7 +43,7 @@ public class Place extends EntityBase {
 		HPModifier = hPModifier;
 	}
 
-	public float getMPModifier() {
+	public Float getMPModifier() {
 		return MPModifier;
 	}
 
@@ -48,12 +51,12 @@ public class Place extends EntityBase {
 		MPModifier = mPModifier;
 	}
 
-	public int getReqLvl() {
+	public Integer getReqLvl() {
 		return reqLvl;
 	}
 
 	public void setReqLvl(int reqLvl) {
 		this.reqLvl = reqLvl;
 	}
-
+	
 }
