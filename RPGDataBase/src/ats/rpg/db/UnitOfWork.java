@@ -2,6 +2,8 @@ package ats.rpg.db;
 
 import java.sql.Connection;
 
+import ats.rpg.db.dao.UnitOfWorkDao;
+
 /**
  * Interface:
  * 1. Establish connection - getConnection();

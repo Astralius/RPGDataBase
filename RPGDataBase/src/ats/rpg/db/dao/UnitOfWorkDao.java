@@ -1,9 +1,8 @@
-package ats.rpg.db;
+package ats.rpg.db.dao;
 
-/**
- * Interface:
- * 
- */
+import ats.rpg.db.EntityBase;
+
+
 public interface UnitOfWorkDao {
 
 	public void persistAdd(EntityBase ent);

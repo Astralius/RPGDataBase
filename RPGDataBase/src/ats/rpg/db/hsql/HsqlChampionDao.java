@@ -16,9 +16,8 @@ import ats.rpg.util.Profession;
 
 public class HsqlChampionDao extends DaoBase<Champion> implements ChampionDao {
 
-	private HsqlUnitOfWork uow;
-
 	private Statement stmt;
+	
 	private PreparedStatement insert;
 	private PreparedStatement delete;
 	private PreparedStatement update;
@@ -26,15 +25,10 @@ public class HsqlChampionDao extends DaoBase<Champion> implements ChampionDao {
 	private PreparedStatement selectId;
 	private PreparedStatement drop;
 	
-	InventorySlotDao inventoryDao;
-	AccountDao accountDao;
-	PlaceDao placeDao;
-	
 
 	public HsqlChampionDao(HsqlUnitOfWork uow)
 	{
 		super(uow);
-		this.uow = uow;
 		try {
 			Connection connection = uow.getConnection();
 			
@@ -247,7 +241,6 @@ public class HsqlChampionDao extends DaoBase<Champion> implements ChampionDao {
 			selectId.setLong(1, c.getId());
 			ResultSet rs = selectId.executeQuery();
 			rs.next();
-			dao = new HsqlAccountDao(uow);
 			c.setAccount(dao.get(rs.getLong("account_id")));
 			selectId.clearParameters();
 		} catch (SQLException e) {
@@ -261,7 +254,6 @@ public class HsqlChampionDao extends DaoBase<Champion> implements ChampionDao {
 			selectId.setLong(1, c.getId());
 			ResultSet rs = selectId.executeQuery();
 			rs.next();
-			dao = new HsqlPlaceDao(uow);
 			c.setPlace(dao.get(rs.getLong("place_id")));
 			selectId.clearParameters();
 		} catch (SQLException e) {

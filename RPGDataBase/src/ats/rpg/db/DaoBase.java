@@ -2,11 +2,13 @@ package ats.rpg.db;
 
 import java.util.List;
 
+import ats.rpg.db.dao.UnitOfWorkDao;
+
 
 public abstract class DaoBase<E extends EntityBase> 
 	implements Dao<E>, UnitOfWorkDao {
 
-	UnitOfWork uow;
+	private UnitOfWork uow;
 	
 	protected DaoBase(UnitOfWork uow) {
 		this.uow=uow;

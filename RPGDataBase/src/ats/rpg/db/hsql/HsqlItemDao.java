@@ -15,8 +15,6 @@ import ats.rpg.util.ItemType;
 
 public class HsqlItemDao extends DaoBase<Item> implements ItemDao {
 
-	private HsqlUnitOfWork uow;
-	
 	private Statement stmt;
 
 	private PreparedStatement insert;
@@ -26,13 +24,10 @@ public class HsqlItemDao extends DaoBase<Item> implements ItemDao {
 	private PreparedStatement selectId;
 	private PreparedStatement drop;
 	
-	InventorySlotDao inventoryDao;
-	
 	
 	public HsqlItemDao(HsqlUnitOfWork uow)
 	{
 		super(uow);
-		this.uow = uow;
 		try {
 			Connection connection = uow.getConnection();
 			
@@ -190,9 +185,8 @@ public class HsqlItemDao extends DaoBase<Item> implements ItemDao {
 	}
 
 	@Override
-	public void setInventorySlots(Item item) {
-		inventoryDao = new HsqlInventorySlotDao(uow);
-		item.setInventorySlots(inventoryDao.getInventorySlotsByItemId(item.getId()));
+	public void setInventorySlots(Item item, InventorySlotDao dao) {
+		item.setInventorySlots(dao.getInventorySlotsByItemId(item.getId()));
 		for(InventorySlot i : item.getInventorySlots()){
 			i.setItem(item);
 		}

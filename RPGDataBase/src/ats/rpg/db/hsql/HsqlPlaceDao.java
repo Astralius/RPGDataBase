@@ -22,8 +22,6 @@ public class HsqlPlaceDao extends DaoBase<Place> implements PlaceDao {
 	private PreparedStatement selectId;
 	private PreparedStatement drop;
 	
-	ChampionDao championDao;
-	
 	
 	public HsqlPlaceDao(HsqlUnitOfWork uow)
 	{

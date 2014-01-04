@@ -6,30 +6,26 @@ import java.util.Map;
 
 import ats.rpg.db.EntityBase;
 import ats.rpg.db.UnitOfWork;
-import ats.rpg.db.UnitOfWorkDao;
+import ats.rpg.db.dao.UnitOfWorkDao;
+import ats.rpg.util.EntityOperation;
 
 
 public class HsqlUnitOfWork implements UnitOfWork {
 
-	private Map<EntityBase, UnitOfWorkDao> added;
-	private Map<EntityBase, UnitOfWorkDao> deleted;
-	private Map<EntityBase, UnitOfWorkDao> changed;
+	private Map<EntityBase, UnitOfWorkDao> items;
 	
 	Connection connection;
 	
 	public HsqlUnitOfWork() {
-		added = new HashMap<EntityBase, UnitOfWorkDao>();
-		deleted = new HashMap<EntityBase, UnitOfWorkDao>();
-		changed = new HashMap<EntityBase, UnitOfWorkDao>();
-		connection = getConnection();
+		items = new HashMap<EntityBase, UnitOfWorkDao>();
+		connection = establishConnection();
 	}
 	
-	public Connection getConnection() {
+	public Connection establishConnection() {
 		try {
-			if(connection==null||connection.isClosed())
+			if(connection==null || connection.isClosed())
 				connection = DriverManager.getConnection
 					("jdbc:hsqldb:hsql://localhost/");
-			connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			connection.setAutoCommit(false);
 		} 
 		catch(SQLException ex) {
@@ -38,16 +34,23 @@ public class HsqlUnitOfWork implements UnitOfWork {
 		return connection;
 	}
 	
+	public Connection getConnection() {
+		return connection;
+	}
+	
 	public void markNew(EntityBase ent, UnitOfWorkDao dao) {
-		added.put(ent, dao);	
+		ent.setOperation(EntityOperation.INSERT);
+		items.put(ent, dao);	
 	}
 
 	public void markDeleted(EntityBase ent, UnitOfWorkDao dao) {
-		deleted.put(ent, dao);	
+		ent.setOperation(EntityOperation.DELETE);
+		items.put(ent, dao);
 	}
 
 	public void markUpdated(EntityBase ent, UnitOfWorkDao dao) {
-		changed.put(ent, dao);	
+		ent.setOperation(EntityOperation.UPDATE);
+		items.put(ent, dao);
 	}
 
 	public void commit() {	
@@ -55,19 +58,26 @@ public class HsqlUnitOfWork implements UnitOfWork {
 		try {
 			conn.setAutoCommit(false);
 			
-			for(EntityBase ent : added.keySet())
-				added.get(ent).persistAdd(ent);
-			for(EntityBase ent : changed.keySet())
-				changed.get(ent).persistUpdate(ent);
-			for(EntityBase ent : deleted.keySet())
-				deleted.get(ent).persistDelete(ent);
+			for (EntityBase ent : items.keySet()) {
+				switch(ent.getOperation()) {
+				case INSERT:
+					items.get(ent).persistAdd(ent);
+					break;
+				case UPDATE:
+					items.get(ent).persistUpdate(ent);
+					break;
+				case DELETE:
+					items.get(ent).persistDelete(ent);
+					break;
+				default:
+				}
+			}
 			
-			added.clear();
-			changed.clear();
-			deleted.clear();
+			items.clear();
 			
 			conn.commit();
 			conn.setAutoCommit(true);
+			
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}	

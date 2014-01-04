@@ -12,10 +12,9 @@ import ats.rpg.entities.Account;
 
 
 public class HsqlAccountDao extends DaoBase<Account> implements AccountDao {
-
-	private HsqlUnitOfWork uow;
 	
 	private Statement stmt;
+	
 	private PreparedStatement insert;
 	private PreparedStatement delete;
 	private PreparedStatement update;
@@ -23,13 +22,10 @@ public class HsqlAccountDao extends DaoBase<Account> implements AccountDao {
 	private PreparedStatement selectId;
 	private PreparedStatement drop;
 	
-	ChampionDao championDao;
-	
 	
 	public HsqlAccountDao(HsqlUnitOfWork uow)
 	{
 		super(uow);
-		this.uow = uow;
 		try {
 			Connection connection = uow.getConnection();
 			
@@ -174,8 +170,7 @@ public class HsqlAccountDao extends DaoBase<Account> implements AccountDao {
 
 	@Override
 	public void setChampions(Account a, ChampionDao dao) {
-		championDao = new HsqlChampionDao(uow);
-		a.setChampions(championDao.getChampionsByAccountId(a.getId()));
+		a.setChampions(dao.getChampionsByAccountId(a.getId()));
 	}
 	
 	@Override

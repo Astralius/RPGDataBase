@@ -368,7 +368,7 @@ public class DaoTestFull {
 		for(InventorySlot slot : hisInventory) {
 			if(!(slot == null)) {
 				Item item = slot.getItem();
-				itmDao.setInventorySlots(item);
+				itmDao.setInventorySlots(item, invDao);
 				hisItems.add(item);
 			}
 		}

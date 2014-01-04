@@ -6,5 +6,5 @@ import ats.rpg.entities.*;
 
 public interface ItemDao extends Dao<Item> {
 	
-	public void setInventorySlots(Item item);
+	public void setInventorySlots(Item item, InventorySlotDao dao);
 }
