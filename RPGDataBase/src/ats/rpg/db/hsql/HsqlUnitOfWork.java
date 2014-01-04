@@ -18,10 +18,10 @@ public class HsqlUnitOfWork implements UnitOfWork {
 	
 	public HsqlUnitOfWork() {
 		items = new HashMap<EntityBase, UnitOfWorkDao>();
-		connection = establishConnection();
+		connection = getConnection();
 	}
 	
-	public Connection establishConnection() {
+	public Connection getConnection() {
 		try {
 			if(connection==null || connection.isClosed())
 				connection = DriverManager.getConnection
@@ -31,10 +31,6 @@ public class HsqlUnitOfWork implements UnitOfWork {
 		catch(SQLException ex) {
 			ex.printStackTrace();
 		}
-		return connection;
-	}
-	
-	public Connection getConnection() {
 		return connection;
 	}
 	
@@ -53,7 +49,8 @@ public class HsqlUnitOfWork implements UnitOfWork {
 		items.put(ent, dao);
 	}
 
-	public void commit() {	
+	public void commit() {
+		
 		Connection conn = getConnection();
 		try {
 			conn.setAutoCommit(false);
@@ -73,9 +70,8 @@ public class HsqlUnitOfWork implements UnitOfWork {
 				}
 			}
 			
-			items.clear();
-			
 			conn.commit();
+			items.clear();
 			conn.setAutoCommit(true);
 			
 		} catch(SQLException ex) {
