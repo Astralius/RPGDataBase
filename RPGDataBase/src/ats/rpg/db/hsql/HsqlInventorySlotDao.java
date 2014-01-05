@@ -116,7 +116,6 @@ public class HsqlInventorySlotDao extends HsqlDaoBase<InventorySlot>
 	protected void setInsertQuery(InventorySlot ent) throws SQLException {
 		insert.setLong(1, ent.getItem().getId());			// Not Null
 		insert.setLong(2, ent.getChampion().getId());		// Not Null
-		insert.executeUpdate();
 	}
 
 	@Override
@@ -131,7 +130,6 @@ public class HsqlInventorySlotDao extends HsqlDaoBase<InventorySlot>
 		update.setLong(1, ent.getItem().getId());
 		update.setLong(2, ent.getChampion().getId());
 		update.setLong(3, ent.getId());
-		update.executeUpdate();
 	}
 	
 }

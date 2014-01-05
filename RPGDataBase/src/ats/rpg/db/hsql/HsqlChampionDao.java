@@ -87,15 +87,6 @@ public class HsqlChampionDao extends HsqlDaoBase<Champion> implements ChampionDa
 			e.printStackTrace();
 		}
 	}
-	
-	@Override
-	public void drop() {
-		try {
-			drop.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	protected String getTableName() {
@@ -148,7 +139,6 @@ public class HsqlChampionDao extends HsqlDaoBase<Champion> implements ChampionDa
 		insert.setInt(6, ent.getCoins());
 		insert.setLong(7, ent.getAccount().getId());	// Not null
 		insert.setLong(8, ent.getPlace().getId());		// Not null
-		insert.executeUpdate();
 	}
 
 	@Override
@@ -169,7 +159,6 @@ public class HsqlChampionDao extends HsqlDaoBase<Champion> implements ChampionDa
 		update.setLong(7, ent.getPlace().getId());
 		update.setLong(8, ent.getAccount().getId());
 		update.setLong(9, ent.getId());
-		update.executeUpdate();
 	}
 	
 }

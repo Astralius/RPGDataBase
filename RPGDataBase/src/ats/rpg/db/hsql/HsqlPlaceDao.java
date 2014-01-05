@@ -66,7 +66,6 @@ public class HsqlPlaceDao extends HsqlDaoBase<Place> implements PlaceDao {
 		insert.setFloat(2, ent.getHPModifier());	
 		insert.setFloat(3, ent.getMPModifier());
 		insert.setInt(4, ent.getReqLvl());	
-		insert.executeUpdate();
 	}
 
 	@Override
@@ -83,6 +82,5 @@ public class HsqlPlaceDao extends HsqlDaoBase<Place> implements PlaceDao {
 		update.setFloat(3, ent.getMPModifier());
 		update.setInt(4, ent.getReqLvl());
 		update.setLong(5, ent.getId());
-		update.executeUpdate();
 	}
 }

@@ -24,6 +24,7 @@ public abstract class HsqlDaoBase<E extends EntityBase>
 	protected PreparedStatement drop;
 	
 	protected HsqlDaoBase(HsqlUnitOfWork uow) {
+		
 		super(uow);
 		try {
 			Connection connection = uow.getConnection();
@@ -41,8 +42,9 @@ public abstract class HsqlDaoBase<E extends EntityBase>
 					break;
 				}
 			}
-			if(!exist)
+			if(!exist) {
 				stmt.executeUpdate(getCreateQuery());
+			}
 			
 			insert = connection.prepareStatement(getInsertQuery());
 			update = connection.prepareStatement(getUpdateQuery());
@@ -115,8 +117,8 @@ public abstract class HsqlDaoBase<E extends EntityBase>
 		{
 			ResultSet rs = select.executeQuery();
 			while(rs.next()){
-				E result = get(rs.getLong("id"));
-				results.add(result);
+				//E result = get(rs.getLong("id"));
+				results.add(build(rs));
 			}
 			return results;
 		}

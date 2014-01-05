@@ -17,6 +17,7 @@ import ats.rpg.util.*;
 public class DaoTestFull {
 
 	static HsqlUnitOfWork testUOW;
+	
 	static HsqlAccountDao accDao;
 	static HsqlPlaceDao plcDao;
 	static HsqlItemDao itmDao;
@@ -113,7 +114,6 @@ public class DaoTestFull {
 		accDao.drop();
 		plcDao.drop();
 		itmDao.drop();
-		
 	}
 		
 	@Test
@@ -183,7 +183,7 @@ public class DaoTestFull {
 		assertThat("Zły Item.mpBonus",
 				InvFromDb.getId(), is((long)0));
 	}
-	/*
+	
 	@Test
 	public void getAllTest() {
 		
@@ -376,5 +376,5 @@ public class DaoTestFull {
 			assertTrue(item.equals(itmDao.get(0)) || item.equals(itmDao.get(1)));
 		}
 	}
-	*/
+	
 }

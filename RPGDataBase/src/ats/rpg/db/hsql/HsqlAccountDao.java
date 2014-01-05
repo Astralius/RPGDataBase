@@ -56,7 +56,6 @@ public class HsqlAccountDao extends HsqlDaoBase<Account> implements AccountDao {
 		insert.setString(2, ent.getPassword());			// Not Null
 		insert.setString(3, ent.getEmail());			// Not Null
 		insert.setDate(4, ent.getCreationDate());		// auto	
-		insert.executeUpdate();
 	}
 
 	@Override
@@ -73,7 +72,6 @@ public class HsqlAccountDao extends HsqlDaoBase<Account> implements AccountDao {
 		update.setString(3, ent.getEmail());
 		update.setDate(4, ent.getCreationDate());
 		update.setLong(5, ent.getId());
-		update.executeUpdate();
 	}
 
 }

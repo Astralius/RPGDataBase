@@ -67,11 +67,12 @@ public class HsqlUnitOfWork implements UnitOfWork {
 					items.get(ent).persistDelete(ent);
 					break;
 				default:
+					break;
 				}
 			}
+			items.clear();
 			
 			conn.commit();
-			items.clear();
 			conn.setAutoCommit(true);
 			
 		} catch(SQLException ex) {

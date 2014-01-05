@@ -79,7 +79,6 @@ public class HsqlItemDao extends HsqlDaoBase<Item> implements ItemDao {
 		insert.setInt(4, ent.getDamage());
 		insert.setInt(5, ent.getDefense());
 		insert.setInt(6, ent.getMpBonus());
-		insert.executeUpdate();
 	}
 
 	@Override
@@ -98,7 +97,6 @@ public class HsqlItemDao extends HsqlDaoBase<Item> implements ItemDao {
 		update.setInt(5, ent.getDefense());
 		update.setInt(6, ent.getMpBonus());
 		update.setLong(7, ent.getId());
-		update.executeUpdate();
 	}
 	
 }
